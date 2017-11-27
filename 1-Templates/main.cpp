@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "test.h"
 
 class Person
 {
@@ -78,14 +79,25 @@ T clamp(T value, T lower, T upper)
 	}
 }
 
-template<typename T>
-T swap(T valueOne, T valueTwo)
-{
-
-}
+/* template<typename T>
+void swap(T& a, T& b) */
 
 int main()
 {
+	assert<true>(5 == 5);
+	assertEqual(5, 5);
+	assertNotEqual(5, 4);
+
+	/* int thing = 5;
+	int fwoob = 7; 
+
+	double dinosaur = 1.1f;
+	double hotdog = 2.3f;
+
+	swap(dinosaur, hotdog);
+
+	swap(thing, fwoob); */
+
 	Person theKob;
 	theKob.name = "Kobington";
 	theKob.age = 19;
