@@ -1,6 +1,7 @@
 #include "intvector.h"
 #include <cassert>
 #include <cstring>
+#include <iostream>
 
 intVector::intVector()
 {
@@ -12,6 +13,16 @@ intVector::intVector()
 intVector::~intVector()
 {
 	delete[] data;
+}
+
+int & intVector::operator[](size_t idx)
+{
+	return data[idx];
+}
+
+int intVector::operator[](size_t idx) const
+{
+	return data[idx];
 }
 
 int& intVector::at(size_t idx)
@@ -32,6 +43,8 @@ int& intVector::append(int val)
 
 	data[size] = val;
 	++size;
+
+	return data[size];
 }
 
 bool intVector::grow(size_t minSize)
@@ -85,4 +98,85 @@ int intVector::front() const
 int intVector::back() const
 {
 	return data[size - 1];
+}
+
+void intVector::Clear()
+{
+	size = 0;
+}
+
+void intVector::Erase(size_t idx)
+{
+	for (int i = idx; i < size; i++)
+	{
+		int temp = data[i];
+		data[i] = data[i + 1];
+		data[i + 1] = temp;
+	}
+
+	size--;
+}
+
+int intVector::Count(int value)
+{
+	int counter = 0;
+	for (int i - 0; i < size; i++)
+	{
+		if (data[i] == value)
+		{
+			counter++;
+		}
+	}
+	return counter;
+}
+
+void intVector::Insert(size_t idx, int value)
+{
+	assert(idx >= 0);
+	assert(idx < size);
+
+	append(value);
+
+	for (int i = size; i >= idx; i--)
+	{
+		int temp = data[i];
+		data[i] = data[i - 1];
+		data[i - 1] = temp;
+	}
+
+
+}
+
+void intVector::Reserve(size_t newCapacity)
+{
+	if (newCapacity > capacity)
+	{
+		assert(newCapacity > capacity);
+		int *newData = new int[newCapacity];
+		memcpy(newData, data, sizeof(int) * size);
+		delete[] data;
+		data = newData;
+		capacity = newCapacity;
+	}
+
+}
+
+void intVector::Compact()
+{
+	if (capacity > size)
+	{
+		int * newData = new int[size];
+		memcpy(newData, data, sizeof(int) * size);
+		delete[] data;
+		data = newData;
+		capacity = size;
+	}
+}
+
+void intVector::printVector()
+{
+	for (int i = 0; i < size; i++)
+	{
+
+	}
 }
