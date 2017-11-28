@@ -49,10 +49,40 @@ bool intVector::grow(size_t minSize)
 	}
 
 	int* newData = new int[capacity];
-	memcpy(newData, data, size);
+	memcpy(newData, data, sizeof(int) * size);
 
 	delete[] data;
 
 	data = newData;
 	return true;
+}
+
+int* intVector::c_ptr() const
+{
+	return data;
+}
+
+size_t intVector::getCapacity() const
+{
+	return capacity;
+}
+
+size_t intVector::getSize() const
+{
+	return size;
+}
+
+bool intVector::empty() const
+{
+	return size == 0;
+}
+
+int intVector::front() const
+{
+	return data[0];
+}
+
+int intVector::back() const
+{
+	return data[size - 1];
 }
